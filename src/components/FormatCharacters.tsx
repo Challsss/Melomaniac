@@ -12,8 +12,8 @@ interface CharacterSVGProps {
 export function VinylCharacterSVG({ className = 'w-full h-full' }: CharacterSVGProps) {
   return (
     <svg
-      viewBox="0 0 140 140"
-      className={`${className} drop-shadow-[4px_4px_0px_#260701]`}
+      viewBox="-6 -6 152 152"
+      className={`${className} drop-shadow-[4px_4px_0px_#260701] overflow-visible`}
       aria-label="Don Surco - Personaje Vinilo"
     >
       {/* Piernas elásticas Rubber-Hose */}
@@ -175,8 +175,8 @@ export function VinylCharacterSVG({ className = 'w-full h-full' }: CharacterSVGP
 export function CassetteCharacterSVG({ className = 'w-full h-full' }: CharacterSVGProps) {
   return (
     <svg
-      viewBox="0 0 140 140"
-      className={`${className} drop-shadow-[4px_4px_0px_#260701]`}
+      viewBox="-6 -6 152 152"
+      className={`${className} drop-shadow-[4px_4px_0px_#260701] overflow-visible`}
       aria-label="Max Cromo - Personaje Casette"
     >
       {/* Piernas elásticas Rubber-Hose */}
@@ -351,8 +351,8 @@ export function CassetteCharacterSVG({ className = 'w-full h-full' }: CharacterS
 export function CdCharacterSVG({ className = 'w-full h-full' }: CharacterSVGProps) {
   return (
     <svg
-      viewBox="0 0 140 140"
-      className={`${className} drop-shadow-[4px_4px_0px_#260701]`}
+      viewBox="-6 -6 152 152"
+      className={`${className} drop-shadow-[4px_4px_0px_#260701] overflow-visible`}
       aria-label="Lady Láser - Personaje CD"
     >
       {/* Piernas elásticas Rubber-Hose */}
@@ -572,7 +572,7 @@ export function FormatSectionsShowcase({
                   onSelectFormat(isSelected ? 'all' : dept.format);
                 }
               }}
-              className={`brutal-card rounded-2xl sm:rounded-3xl p-3.5 sm:p-5 cursor-pointer relative overflow-hidden flex flex-col justify-between transition-all ${
+              className={`brutal-card rounded-2xl sm:rounded-3xl p-3.5 sm:p-5 cursor-pointer relative flex flex-col justify-between transition-all ${
                 isSelected
                   ? 'bg-[#f5e6c4] ring-4 ring-[#d91e00] -translate-y-0.5 sm:-translate-y-1 shadow-[8px_8px_0px_#260701]'
                   : 'bg-[#fdf6e2] hover:bg-[#f5e6c4]'
@@ -580,11 +580,11 @@ export function FormatSectionsShowcase({
             >
               {/* Cinta superior del apartado (solo en tablet/escritorio para airear móvil) */}
               <div className="hidden sm:flex items-center justify-between gap-2 mb-3">
-                <span className="text-[11px] font-extrabold uppercase tracking-wider px-2.5 py-0.5 rounded-full border-2 border-[#260701] bg-[#260701] text-[#f9a602]">
+                <span className="text-[11px] font-extrabold uppercase tracking-wider px-2.5 py-0.5 rounded-full border-2 border-[#260701] bg-[#260701] text-[#f9a602] whitespace-nowrap">
                   {dept.badgeText}
                 </span>
                 <span
-                  className={`text-[11px] font-extrabold uppercase px-2.5 py-0.5 rounded-full border-2 border-[#260701] tabular-nums ${
+                  className={`text-[11px] font-extrabold uppercase px-2.5 py-0.5 rounded-full border-2 border-[#260701] tabular-nums whitespace-nowrap ${
                     isSelected
                       ? 'bg-[#d91e00] text-[#fdf6e2]'
                       : 'bg-[#f9a602] text-[#260701]'
@@ -595,17 +595,17 @@ export function FormatSectionsShowcase({
               </div>
 
               {/* Cuerpo con Personaje + Presentación del Apartado (compacto y limpio en móvil) */}
-              <div className="flex items-center gap-3.5 sm:gap-4 my-0.5 sm:my-1">
-                <div className="rubber-idle w-16 h-16 sm:w-24 sm:h-24 shrink-0">
+              <div className="flex items-center gap-3 sm:gap-4 my-0.5 sm:my-1">
+                <div className="rubber-idle w-14 h-14 sm:w-24 sm:h-24 shrink-0">
                   <FormatCharacterAvatar format={dept.format} />
                 </div>
 
                 <div className="min-w-0 flex-1">
-                  <div className="inline-block bg-[#f9a602] text-[#260701] border-2 border-[#260701] rounded-lg px-2 py-0.5 text-[10px] font-extrabold uppercase mb-1 shadow-[2px_2px_0px_#260701]">
+                  <div className="inline-block bg-[#f9a602] text-[#260701] border-2 border-[#260701] rounded-lg px-2 py-0.5 text-[10px] font-extrabold uppercase mb-1 shadow-[2px_2px_0px_#260701] whitespace-nowrap">
                     {dept.characterName}
                     <span className="hidden sm:inline"> • {dept.characterRole}</span>
                   </div>
-                  <h3 className="font-caprasimo text-lg sm:text-2xl text-[#260701] leading-tight">
+                  <h3 className="font-caprasimo text-base sm:text-2xl text-[#260701] leading-tight">
                     {dept.sectionTitle}
                   </h3>
                   <p className="text-xs font-extrabold italic text-[#9e1b00] mt-0.5 sm:mt-1 line-clamp-1 sm:line-clamp-none">
@@ -616,7 +616,7 @@ export function FormatSectionsShowcase({
                 {/* Indicador rápido en móvil */}
                 <div className="sm:hidden shrink-0">
                   <span
-                    className={`inline-flex items-center justify-center rounded-full px-2.5 py-1 text-[11px] font-extrabold border-2 border-[#260701] shadow-[2px_2px_0px_#260701] ${
+                    className={`inline-flex items-center justify-center rounded-full px-2.5 py-1 text-[11px] font-extrabold border-2 border-[#260701] shadow-[2px_2px_0px_#260701] whitespace-nowrap ${
                       isSelected
                         ? 'bg-[#d91e00] text-[#fdf6e2]'
                         : 'bg-[#f9a602] text-[#260701]'

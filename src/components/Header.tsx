@@ -72,7 +72,7 @@ export function Header({
 
         {/* Buscador Brutalista + Botón de Carrito en una sola fila limpia en móvil */}
         <div className="flex flex-row items-center gap-2.5 sm:gap-3.5 lg:w-auto">
-          <div className="relative flex-1 sm:w-72">
+          <div className="relative flex-1 min-w-0 sm:w-72">
             <input
               type="text"
               value={searchQuery}

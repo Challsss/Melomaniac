@@ -144,33 +144,36 @@ export function FormatProductPage({
         </div>
 
         {/* Selector rápido entre las 3 páginas de producto (Vinilo, Casete, CD) */}
-        <div className="flex flex-wrap items-center gap-2">
+        <div className="flex flex-col sm:flex-row sm:flex-wrap sm:items-center gap-2">
           <span className="text-xs font-extrabold uppercase text-[#4a1504] mr-1">
             VER FICHA TIPO:
           </span>
-          {(
-            [
-              { id: 'LP', label: '● Ficha Vinilo' },
-              { id: 'CASSETTE', label: '📼 Ficha Casete' },
-              { id: 'CD', label: '💿 Ficha CD' },
-            ] as { id: FormatType; label: string }[]
-          ).map((tab) => {
-            const active = tab.id === format;
-            return (
-              <button
-                key={tab.id}
-                type="button"
-                onClick={() => onSwitchFormatPage(tab.id)}
-                className={`rubber-btn rounded-full px-3.5 py-1.5 text-xs font-extrabold ${
-                  active
-                    ? 'bg-[#d91e00] text-[#fdf6e2]'
-                    : 'bg-[#fdf6e2] hover:bg-[#f9a602] text-[#260701]'
-                }`}
-              >
-                {tab.label}
-              </button>
-            );
-          })}
+          <div className="grid grid-cols-3 sm:flex sm:flex-wrap items-center gap-2">
+            {(
+              [
+                { id: 'LP', label: '● Ficha Vinilo', shortLabel: '● Vinilo' },
+                { id: 'CASSETTE', label: '📼 Ficha Casete', shortLabel: '📼 Casete' },
+                { id: 'CD', label: '💿 Ficha CD', shortLabel: '💿 CD' },
+              ] as { id: FormatType; label: string; shortLabel: string }[]
+            ).map((tab) => {
+              const active = tab.id === format;
+              return (
+                <button
+                  key={tab.id}
+                  type="button"
+                  onClick={() => onSwitchFormatPage(tab.id)}
+                  className={`rubber-btn rounded-full px-2.5 sm:px-3.5 py-1.5 text-xs font-extrabold inline-flex items-center justify-center whitespace-nowrap ${
+                    active
+                      ? 'bg-[#d91e00] text-[#fdf6e2]'
+                      : 'bg-[#fdf6e2] hover:bg-[#f9a602] text-[#260701]'
+                  }`}
+                >
+                  <span className="sm:hidden">{tab.shortLabel}</span>
+                  <span className="hidden sm:inline">{tab.label}</span>
+                </button>
+              );
+            })}
+          </div>
         </div>
       </div>
 
