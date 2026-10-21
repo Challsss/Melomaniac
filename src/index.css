@@ -1,0 +1,222 @@
+:root {
+  --ink-dark: #260701;
+  --ink-brown: #4a1504;
+  --retro-red: #d91e00;
+  --retro-crimson: #9e1b00;
+  --retro-orange: #f96d00;
+  --retro-yellow: #f9a602;
+  --paper-cream: #fdf6e2;
+  --paper-warm: #f5e6c4;
+  --bg-sand-light: #f4e7c8;
+  --bg-sand-mid: #e8cfa0;
+  --bg-sand-warm: #d9b574;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-weight: 500;
+  color: var(--ink-dark);
+  background-color: var(--bg-sand-mid);
+  /* Fondo cálido y luminoso estilo póster serigrafiado años 70:
+     luz crema central + transición suave a arena dorada + micro-trama editorial sutil */
+  background-image:
+    radial-gradient(
+      ellipse at 50% 0%,
+      rgba(253, 246, 226, 0.92) 0%,
+      rgba(236, 214, 172, 0.85) 55%,
+      rgba(214, 180, 118, 0.92) 100%
+    ),
+    radial-gradient(rgba(38, 7, 1, 0.065) 1.25px, transparent 1.25px),
+    repeating-linear-gradient(
+      -45deg,
+      rgba(249, 166, 2, 0.035) 0px,
+      rgba(249, 166, 2, 0.035) 2px,
+      transparent 2px,
+      transparent 14px
+    );
+  background-size: 100% 100%, 22px 22px, 100% 100%;
+  background-position: 0 0, 0 0, 0 0;
+  background-attachment: fixed;
+  overflow-x: hidden;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+/* Utilidad para ocultar scrollbars horizontales en filtros móviles */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Tipografía Caprasimo con acabado Cuphead + 70s */
+.font-caprasimo {
+  font-family: 'Caprasimo', cursive, serif;
+  font-weight: 400;
+}
+
+.cuphead-title {
+  font-family: 'Caprasimo', cursive, serif;
+  color: var(--paper-cream);
+  -webkit-text-stroke: 4px var(--ink-dark);
+  paint-order: stroke fill;
+  text-shadow:
+    4px 4px 0px var(--ink-dark),
+    7px 7px 0px var(--retro-red),
+    9px 9px 0px var(--ink-dark);
+  letter-spacing: 0.02em;
+}
+
+.cuphead-subtitle {
+  font-family: 'Caprasimo', cursive, serif;
+  color: var(--retro-yellow);
+  -webkit-text-stroke: 3.5px var(--ink-dark);
+  paint-order: stroke fill;
+  text-shadow:
+    3px 3px 0px var(--ink-dark),
+    5px 5px 0px var(--ink-dark);
+}
+
+.price-display {
+  font-family: 'Caprasimo', cursive, serif;
+  color: var(--retro-orange);
+  -webkit-text-stroke: 3px var(--ink-dark);
+  paint-order: stroke fill;
+  text-shadow: 2.5px 2.5px 0px var(--ink-dark);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  display: inline-block;
+}
+
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Tarjetas y contenedores Cartoon-Brutalism
+   Usamos :where() para el background/border/shadow base de modo que cualquier utilidad
+   de Tailwind (como bg-[#260701], bg-[#f5e6c4], bg-[#f9a602]) tenga prioridad y nunca
+   se rompa el contraste en componentes oscuros como el reproductor o el banner superior. */
+:where(.brutal-box) {
+  background-color: var(--paper-cream);
+  border: 3px solid var(--ink-dark);
+  box-shadow: 6px 6px 0px var(--ink-dark);
+}
+
+:where(.brutal-card) {
+  background-color: var(--paper-cream);
+}
+
+.brutal-card {
+  border: 3px solid var(--ink-dark);
+  box-shadow: 6px 6px 0px var(--ink-dark);
+  transition:
+    transform 0.32s cubic-bezier(0.34, 1.56, 0.64, 1),
+    box-shadow 0.25s ease;
+}
+
+.brutal-card:hover {
+  transform: translate(-4px, -6px) rotate(-0.4deg);
+  box-shadow:
+    11px 12px 0px var(--ink-dark),
+    14px 15px 0px var(--retro-orange);
+}
+
+/* Botones elásticos Rubber-Hose */
+:where(.rubber-btn) {
+  border: 3px solid var(--ink-dark);
+  box-shadow: 4px 4px 0px var(--ink-dark);
+}
+
+.rubber-btn {
+  transition:
+    transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1),
+    box-shadow 0.2s ease,
+    background-color 0.15s ease,
+    color 0.15s ease;
+  cursor: pointer;
+}
+
+.rubber-btn:hover {
+  transform: translate(-2px, -3px) scale(1.02);
+  box-shadow: 6px 7px 0px var(--ink-dark);
+}
+
+.rubber-btn:active {
+  transform: translate(3px, 3px) scale(0.97);
+  box-shadow: 1px 1px 0px var(--ink-dark);
+}
+
+/* Efecto del vinilo o casete asomando de la funda al hacer hover */
+.record-disc {
+  transition: transform 0.55s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.brutal-card:hover .record-disc {
+  transform: translateX(36%) rotate(115deg);
+}
+
+/* Animación idle Rubber-Hose años 30 (rebote de rodillas) */
+@keyframes rubberBounce {
+  0%,
+  100% {
+    transform: translateY(0) scaleY(1) scaleX(1);
+  }
+  50% {
+    transform: translateY(-5px) scaleY(1.04) scaleX(0.97);
+  }
+}
+
+.rubber-idle {
+  animation: rubberBounce 1.15s infinite ease-in-out;
+  transform-origin: bottom center;
+}
+
+@keyframes spinSlow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.spin-vinyl {
+  animation: spinSlow 3.5s linear infinite;
+}
+
+@keyframes stickerWobble {
+  0%,
+  100% {
+    transform: rotate(-8deg) scale(1);
+  }
+  50% {
+    transform: rotate(-4deg) scale(1.06);
+  }
+}
+
+.hype-sticker {
+  animation: stickerWobble 2.8s ease-in-out infinite;
+}
+
+/* Scrollbar personalizada estilo retro */
+::-webkit-scrollbar {
+  width: 12px;
+}
+::-webkit-scrollbar-track {
+  background: var(--paper-warm);
+  border-left: 3px solid var(--ink-dark);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--retro-orange);
+  border: 3px solid var(--ink-dark);
+  border-radius: 99px;
+}

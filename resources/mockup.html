@@ -1,0 +1,1315 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>La Surquería — Discos, Casetes y Rarezas (Mockup Cartoon-Brutalism)</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts: Caprasimo + Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caprasimo&family=Plus+Jakarta+Sans:ital,wght@0,500;0,600;0,700;0,800;1,600&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --ink-dark: #260701;
+      --retro-red: #d91e00;
+      --retro-orange: #f96d00;
+      --retro-yellow: #f9a602;
+      --paper-cream: #fdf6e2;
+      --paper-warm: #f5e6c4;
+      --bg-ochre-light: #b9975b;
+      --bg-ochre-dark: #684f27;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 500;
+      color: var(--ink-dark);
+      background-color: #9e7f47;
+      /* Textura inspirada directamente en la imagen de referencia: degradado ocre + semitonos halftone + motas vintage */
+      background-image:
+        radial-gradient(circle at 55% 42%, rgba(214, 184, 124, 0.72) 0%, rgba(145, 114, 60, 0.85) 58%, rgba(74, 54, 22, 0.96) 100%),
+        radial-gradient(var(--ink-dark) 1.25px, transparent 1.25px),
+        radial-gradient(rgba(38, 7, 1, 0.35) 2px, transparent 2px);
+      background-size: 100% 100%, 16px 16px, 64px 64px;
+      background-position: 0 0, 0 0, 24px 18px;
+      background-attachment: fixed;
+      overflow-x: hidden;
+    }
+
+    /* Superposición sutil de semitonos laterales y grano años 30/70 */
+    .halftone-overlay {
+      background-image: radial-gradient(rgba(38, 7, 1, 0.16) 28%, transparent 30%);
+      background-size: 14px 14px;
+    }
+
+    /* Tipografía Caprasimo con acabado Cuphead + 70s */
+    .font-caprasimo {
+      font-family: 'Caprasimo', cursive, serif;
+      font-weight: 400;
+    }
+
+    .cuphead-title {
+      font-family: 'Caprasimo', cursive, serif;
+      color: var(--paper-cream);
+      -webkit-text-stroke: 2.5px var(--ink-dark);
+      paint-order: stroke fill;
+      text-shadow:
+        4px 4px 0px var(--ink-dark),
+        7px 7px 0px var(--retro-red),
+        9px 9px 0px var(--ink-dark);
+      letter-spacing: 0.02em;
+    }
+
+    .cuphead-subtitle {
+      font-family: 'Caprasimo', cursive, serif;
+      color: var(--retro-yellow);
+      -webkit-text-stroke: 2px var(--ink-dark);
+      paint-order: stroke fill;
+      text-shadow: 3px 3px 0px var(--ink-dark);
+    }
+
+    .price-display {
+      font-family: 'Caprasimo', cursive, serif;
+      color: var(--retro-orange);
+      -webkit-text-stroke: 1.8px var(--ink-dark);
+      paint-order: stroke fill;
+      text-shadow: 2.5px 2.5px 0px var(--ink-dark);
+      font-variant-numeric: tabular-nums;
+    }
+
+    .tabular-nums {
+      font-variant-numeric: tabular-nums;
+    }
+
+    /* Tarjetas y contenedores Cartoon-Brutalism */
+    .brutal-box {
+      background-color: var(--paper-cream);
+      border: 3px solid var(--ink-dark);
+      box-shadow: 6px 6px 0px var(--ink-dark);
+    }
+
+    .brutal-card {
+      background-color: var(--paper-cream);
+      border: 3px solid var(--ink-dark);
+      box-shadow: 6px 6px 0px var(--ink-dark);
+      transition: transform 0.32s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.25s ease;
+    }
+
+    .brutal-card:hover {
+      transform: translate(-4px, -6px) rotate(-0.4deg);
+      box-shadow: 11px 12px 0px var(--ink-dark), 14px 15px 0px var(--retro-orange);
+    }
+
+    /* Botones elásticos Rubber-Hose */
+    .rubber-btn {
+      border: 3px solid var(--ink-dark);
+      box-shadow: 4px 4px 0px var(--ink-dark);
+      transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.2s ease, background-color 0.15s ease;
+    }
+
+    .rubber-btn:hover {
+      transform: translate(-2px, -3px) scale(1.02);
+      box-shadow: 6px 7px 0px var(--ink-dark);
+    }
+
+    .rubber-btn:active {
+      transform: translate(3px, 3px) scale(0.97);
+      box-shadow: 1px 1px 0px var(--ink-dark);
+    }
+
+    /* Efecto del vinilo o casete asomando de la funda al hacer hover */
+    .record-disc {
+      transition: transform 0.55s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .brutal-card:hover .record-disc {
+      transform: translateX(36%) rotate(115deg);
+    }
+
+    /* Animación idle Rubber-Hose años 30 (rebote de rodillas) */
+    @keyframes rubberBounce {
+      0%, 100% {
+        transform: translateY(0) scaleY(1) scaleX(1);
+      }
+      50% {
+        transform: translateY(-5px) scaleY(1.04) scaleX(0.97);
+      }
+    }
+
+    .rubber-idle {
+      animation: rubberBounce 1.15s infinite ease-in-out;
+      transform-origin: bottom center;
+    }
+
+    @keyframes spinSlow {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    .spin-vinyl {
+      animation: spinSlow 3.5s linear infinite;
+    }
+
+    @keyframes stickerWobble {
+      0%, 100% { transform: rotate(-8deg) scale(1); }
+      50% { transform: rotate(-4deg) scale(1.06); }
+    }
+
+    .hype-sticker {
+      animation: stickerWobble 2.8s ease-in-out infinite;
+    }
+
+    /* Scrollbar personalizada estilo retro */
+    ::-webkit-scrollbar {
+      width: 12px;
+    }
+    ::-webkit-scrollbar-track {
+      background: var(--paper-warm);
+      border-left: 3px solid var(--ink-dark);
+    }
+    ::-webkit-scrollbar-thumb {
+      background: var(--retro-orange);
+      border: 3px solid var(--ink-dark);
+      border-radius: 99px;
+    }
+  </style>
+</head>
+<body class="min-h-screen pb-36 relative selection:bg-[#f96d00] selection:text-[#fdf6e2]">
+
+  <!-- Textura de manchas de tinta vintage en las esquinas (No bloquea clics) -->
+  <div class="fixed inset-0 pointer-events-none z-0 halftone-overlay opacity-75"></div>
+
+  <!-- CINTA RETRO 70s IZQUIERDA (Inspirada en la imagen de referencia con bucles concéntricos y puntos semitono) -->
+  <div class="hidden xl:block fixed top-0 left-0 w-44 h-full pointer-events-none z-0 opacity-95">
+    <svg viewBox="0 0 210 900" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-full preserve-3d">
+      <!-- Sombra dura de la cinta -->
+      <path d="M0 58 H95 C128 58 128 10 95 10 C62 10 62 58 95 58 V540 C95 585 145 585 145 540 C145 495 95 495 95 540 V615 H185" stroke="#260701" stroke-width="52" stroke-linecap="round" opacity="0.35" transform="translate(8,8)"/>
+      <!-- Franja Exterior Amarilla -->
+      <path d="M-10 42 H95 C140 42 140 -12 95 -12 C50 -12 50 42 95 42 V560 C95 605 150 605 150 560 C150 515 95 515 95 560 V610 H175" stroke="#f9a602" stroke-width="48" stroke-linecap="round" stroke-linejoin="round"/>
+      <!-- Franja Naranja -->
+      <path d="M-10 42 H95 C140 42 140 -12 95 -12 C50 -12 50 42 95 42 V560 C95 605 150 605 150 560 C150 515 95 515 95 560 V610 H175" stroke="#f96d00" stroke-width="36" stroke-linecap="round" stroke-linejoin="round"/>
+      <!-- Franja Roja -->
+      <path d="M-10 42 H95 C140 42 140 -12 95 -12 C50 -12 50 42 95 42 V560 C95 605 150 605 150 560 C150 515 95 515 95 560 V610 H175" stroke="#d91e00" stroke-width="24" stroke-linecap="round" stroke-linejoin="round"/>
+      <!-- Franja Interior Marrón Tinta -->
+      <path d="M-10 42 H95 C140 42 140 -12 95 -12 C50 -12 50 42 95 42 V560 C95 605 150 605 150 560 C150 515 95 515 95 560 V610 H175" stroke="#260701" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
+      <!-- Puntos de semitono al final de la cinta (como en la imagen de referencia) -->
+      <circle cx="192" cy="593" r="5" fill="#f9a602"/>
+      <circle cx="204" cy="593" r="3.5" fill="#f9a602"/>
+      <circle cx="192" cy="604" r="5" fill="#f96d00"/>
+      <circle cx="204" cy="604" r="3.5" fill="#f96d00"/>
+      <circle cx="192" cy="615" r="5" fill="#d91e00"/>
+      <circle cx="204" cy="615" r="3.5" fill="#d91e00"/>
+      <circle cx="192" cy="626" r="5" fill="#260701"/>
+      <circle cx="204" cy="626" r="3.5" fill="#260701"/>
+    </svg>
+  </div>
+
+  <!-- CONTENEDOR PRINCIPAL -->
+  <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6">
+
+    <!-- BANNER SUPERIOR DE ENVÍOS / ESTILO VODEVIL -->
+    <div class="brutal-box bg-[#260701] text-[#fdf6e2] rounded-2xl px-4 py-2.5 mb-6 flex flex-wrap items-center justify-between gap-2 text-xs sm:text-sm font-bold tracking-wide">
+      <div class="flex items-center gap-2">
+        <span class="inline-block w-3 h-3 rounded-full bg-[#f9a602] animate-ping"></span>
+        <span class="uppercase tracking-wider text-[#f9a602] font-extrabold">EDICIÓN COLECCIONISTA:</span>
+        <span>Todos los vinilos se envían con funda exterior japonesa y limpieza ultrasónica.</span>
+      </div>
+      <div class="flex items-center gap-4 tabular-nums text-[#f9a602]">
+        <span>ENVÍO GRATIS &gt; 60,00 €</span>
+        <span class="hidden sm:inline">•</span>
+        <span class="hidden sm:inline">GRADUACIÓN GOLDMINE GARANTIZADA</span>
+      </div>
+    </div>
+
+    <!-- CABECERA PRINCIPAL -->
+    <header class="brutal-box rounded-3xl p-5 sm:p-7 mb-8 relative overflow-hidden bg-[#fdf6e2]">
+      <!-- Franja decorativa 70s en la esquina superior derecha de la cabecera -->
+      <div class="absolute -right-8 -top-8 w-52 h-52 pointer-events-none opacity-95 hidden md:block">
+        <svg viewBox="0 0 200 200" class="w-full h-full">
+          <circle cx="135" cy="65" r="78" stroke="#260701" stroke-width="14" fill="none"/>
+          <circle cx="135" cy="65" r="65" stroke="#d91e00" stroke-width="14" fill="none"/>
+          <circle cx="135" cy="65" r="52" stroke="#f96d00" stroke-width="14" fill="none"/>
+          <circle cx="135" cy="65" r="39" stroke="#f9a602" stroke-width="14" fill="none"/>
+        </svg>
+      </div>
+
+      <div class="relative z-10 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
+        <!-- Logo + Mascota Rubber-Hose "Don Surco" -->
+        <div class="flex items-center gap-4 sm:gap-5">
+          <!-- Mascota Vinilo años 30 con ojos Pie-Cut -->
+          <div id="mascotContainer" class="rubber-idle relative w-20 h-20 sm:w-24 sm:h-24 shrink-0 cursor-pointer group" title="¡Haz clic para que Don Surco recomiende un disco!">
+            <svg viewBox="0 0 120 120" class="w-full h-full drop-shadow-[4px_4px_0px_#260701]">
+              <!-- Piernas y zapatos estilo años 30 -->
+              <path d="M45 95 Q42 108 35 110" stroke="#260701" stroke-width="5" stroke-linecap="round" fill="none"/>
+              <path d="M75 95 Q78 108 85 110" stroke="#260701" stroke-width="5" stroke-linecap="round" fill="none"/>
+              <ellipse cx="30" cy="112" rx="11" ry="6" fill="#fdf6e2" stroke="#260701" stroke-width="3.5"/>
+              <ellipse cx="90" cy="112" rx="11" ry="6" fill="#fdf6e2" stroke="#260701" stroke-width="3.5"/>
+              <!-- Cuerpo de Vinilo -->
+              <circle cx="60" cy="54" r="44" fill="#260701" stroke="#260701" stroke-width="4"/>
+              <circle cx="60" cy="54" r="37" fill="none" stroke="#4a190c" stroke-width="1.5" stroke-dasharray="14 8"/>
+              <circle cx="60" cy="54" r="31" fill="none" stroke="#4a190c" stroke-width="1.5" stroke-dasharray="10 12"/>
+              <!-- Galleta central 70s -->
+              <circle cx="60" cy="54" r="24" fill="#f9a602" stroke="#260701" stroke-width="3.5"/>
+              <circle cx="60" cy="54" r="18" fill="#f96d00" stroke="#260701" stroke-width="2"/>
+              <!-- Ojos "Pie-Cut" estilo Cuphead / 1930 -->
+              <ellipse cx="51" cy="49" rx="6.5" ry="9.5" fill="#fdf6e2" stroke="#260701" stroke-width="2.5"/>
+              <ellipse cx="69" cy="49" rx="6.5" ry="9.5" fill="#fdf6e2" stroke="#260701" stroke-width="2.5"/>
+              <!-- Pupilas con muesca triangular (Pie-cut) -->
+              <path d="M53 49 L57 46 A4.5 6 0 1 1 53 43 Z" fill="#260701"/>
+              <path d="M71 49 L75 46 A4.5 6 0 1 1 71 43 Z" fill="#260701"/>
+              <!-- Sonrisa Vodevil -->
+              <path d="M46 61 Q60 72 74 61" stroke="#260701" stroke-width="3.5" stroke-linecap="round" fill="none"/>
+              <path d="M53 65 Q60 71 67 65" fill="#d91e00"/>
+              <!-- Mano enguantada saludando -->
+              <path d="M16 56 Q5 45 11 32" stroke="#260701" stroke-width="5" stroke-linecap="round" fill="none"/>
+              <circle cx="12" cy="28" r="8" fill="#fdf6e2" stroke="#260701" stroke-width="3"/>
+            </svg>
+            <span class="absolute -bottom-2 -right-2 bg-[#f9a602] text-[#260701] border-2 border-[#260701] rounded-full px-2 py-0.5 text-[10px] font-extrabold uppercase shadow-[2px_2px_0px_#260701] group-hover:bg-[#f96d00] group-hover:text-white transition-colors">
+              ¡Azar!
+            </span>
+          </div>
+
+          <div>
+            <div class="inline-flex items-center gap-2 bg-[#f9a602] border-2 border-[#260701] px-3 py-0.5 rounded-full shadow-[2px_2px_0px_#260701] mb-1">
+              <span class="text-xs font-extrabold uppercase tracking-wider text-[#260701]">EST. 1973 • SONIDO EN CARNE Y HUESO</span>
+            </div>
+            <h1 class="cuphead-title text-4xl sm:text-5xl md:text-6xl leading-none tracking-tight">
+              LA SURQUERÍA
+            </h1>
+            <p class="mt-1.5 text-sm sm:text-base font-bold text-[#6e260e] flex flex-wrap items-center gap-x-2">
+              <span>Vinilos 180g, Casetes de Cromo y Singles 7"</span>
+              <span class="text-[#d91e00]">•</span>
+              <span class="underline decoration-2 decoration-[#f96d00]">Tipografía Caprasimo + Plus Jakarta Sans</span>
+            </p>
+          </div>
+        </div>
+
+        <!-- Buscador Brutalista + Botón de Carrito -->
+        <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5 lg:w-auto">
+          <div class="relative flex-1 sm:w-72">
+            <input
+              id="searchInput"
+              type="text"
+              placeholder="Buscar álbum, artista, sello..."
+              class="w-full bg-[#f5e6c4] border-3 border-[#260701] rounded-full py-3 pl-11 pr-4 text-sm font-bold text-[#260701] placeholder-[#7a5438] shadow-[4px_4px_0px_#260701] focus:outline-none focus:bg-white focus:ring-2 focus:ring-[#f96d00]"
+              style="border-width: 3px;"
+            />
+            <svg class="w-5 h-5 text-[#260701] absolute left-4 top-1/2 -translate-y-1/2" fill="none" stroke="currentColor" stroke-width="2.8" viewBox="0 0 24 24">
+              <circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35" stroke-linecap="round"/>
+            </svg>
+          </div>
+
+          <button
+            id="cartToggleBtn"
+            class="rubber-btn bg-[#f96d00] hover:bg-[#d91e00] text-[#fdf6e2] rounded-full px-5 py-3 flex items-center justify-center gap-3 font-extrabold text-sm tracking-wide shrink-0"
+          >
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2 9m12-9l2 9m-9-4h6"/>
+            </svg>
+            <span>MI MALETA</span>
+            <span id="cartCountBadge" class="bg-[#f9a602] text-[#260701] border-2 border-[#260701] rounded-full px-2.5 py-0.5 text-xs font-extrabold tabular-nums shadow-[2px_2px_0px_#260701]">
+              2
+            </span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- BARRA DE FILTROS INTERACTIVA (Plus Jakarta Sans en píldoras elásticas) -->
+    <section class="brutal-box rounded-3xl p-4 sm:p-5 mb-8 bg-[#f5e6c4]">
+      <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+        
+        <!-- Filtro por Formato Físico -->
+        <div class="flex flex-wrap items-center gap-2">
+          <span class="text-xs font-extrabold uppercase tracking-wider text-[#6e260e] mr-1 flex items-center gap-1.5">
+            <span class="w-2.5 h-2.5 rounded-full bg-[#d91e00] border border-[#260701]"></span>
+            FORMATO:
+          </span>
+          <button data-format="all" class="format-btn rubber-btn bg-[#260701] text-[#f9a602] rounded-full px-4 py-1.5 text-xs sm:text-sm font-extrabold">
+            Todos (8)
+          </button>
+          <button data-format="LP" class="format-btn rubber-btn bg-[#fdf6e2] text-[#260701] rounded-full px-4 py-1.5 text-xs sm:text-sm font-bold">
+            ● Vinilos LP 12"
+          </button>
+          <button data-format="CASSETTE" class="format-btn rubber-btn bg-[#fdf6e2] text-[#260701] rounded-full px-4 py-1.5 text-xs sm:text-sm font-bold">
+            📼 Casetes Cromo
+          </button>
+          <button data-format="7INCH" class="format-btn rubber-btn bg-[#fdf6e2] text-[#260701] rounded-full px-4 py-1.5 text-xs sm:text-sm font-bold">
+            ◎ Singles 7" (45 RPM)
+          </button>
+        </div>
+
+        <!-- Filtro por Estado de Conservación (Goldmine Standard) + Orden -->
+        <div class="flex flex-wrap items-center gap-2">
+          <span class="text-xs font-extrabold uppercase tracking-wider text-[#6e260e] mr-1">
+            ESTADO:
+          </span>
+          <button data-condition="all" class="cond-btn rubber-btn bg-[#f9a602] text-[#260701] rounded-full px-3.5 py-1 text-xs font-extrabold">
+            Todos
+          </button>
+          <button data-condition="M" class="cond-btn rubber-btn bg-[#fdf6e2] text-[#260701] rounded-full px-3.5 py-1 text-xs font-bold" title="Nuevo / Precintado de fábrica">
+            Mint (M)
+          </button>
+          <button data-condition="NM" class="cond-btn rubber-btn bg-[#fdf6e2] text-[#260701] rounded-full px-3.5 py-1 text-xs font-bold" title="Casi nuevo, sin marcas audibles">
+            Near Mint (NM)
+          </button>
+          <button data-condition="VG+" class="cond-btn rubber-btn bg-[#fdf6e2] text-[#260701] rounded-full px-3.5 py-1 text-xs font-bold" title="Excelente época original con leve pátina">
+            Vintage (VG+)
+          </button>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ENCABEZADO DE LA RETÍCULA + LEYENDA TIPOGRÁFICA -->
+    <div class="flex flex-col sm:flex-row sm:items-end justify-between mb-6 gap-3 px-1">
+      <div>
+        <h2 class="cuphead-subtitle text-2xl sm:text-3xl tracking-wide">
+          CATÁLOGO EN STOCK — BATEA PRINCIPAL
+        </h2>
+        <p class="text-xs sm:text-sm font-bold text-[#260701] bg-[#f9a602]/90 inline-block px-3 py-0.5 rounded-full border-2 border-[#260701] mt-1 shadow-[2px_2px_0px_#260701]">
+          Pasa el ratón por las portadas para sacar el disco • Pulsa «Escuchar Preview» para probar el tocadiscos
+        </p>
+      </div>
+      <div id="resultsCounter" class="text-sm font-extrabold bg-[#fdf6e2] border-2 border-[#260701] px-3.5 py-1.5 rounded-full shadow-[3px_3px_0px_#260701] tabular-nums self-start sm:self-auto">
+        Mostrando 8 joyas analógicas
+      </div>
+    </div>
+
+    <!-- RETÍCULA DE PRODUCTOS CARTOON-BRUTALISM -->
+    <main id="productGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-7 mb-14">
+      <!-- Renderizado dinámico mediante JS -->
+    </main>
+
+    <!-- SECCIÓN EXPLICATIVA DE LA GUÍA DE ESTILO APLICADA -->
+    <section class="brutal-box rounded-3xl p-6 sm:p-8 mb-12 bg-[#fdf6e2] relative overflow-hidden">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
+        <div>
+          <span class="inline-block bg-[#d91e00] text-[#fdf6e2] border-2 border-[#260701] rounded-full px-3 py-0.5 text-xs font-extrabold uppercase mb-2 shadow-[2px_2px_0px_#260701]">
+            Sistema de Diseño Activo
+          </span>
+          <h3 class="font-caprasimo text-2xl sm:text-3xl text-[#260701] leading-tight">
+            ¿Por qué funciona esta retícula?
+          </h3>
+          <p class="text-sm mt-2 text-[#4a190c] font-semibold leading-relaxed">
+            El fondo texturizado respeta la estética sucia y cálida de los años 70, mientras las tarjetas en <strong>papel crema (#fdf6e2)</strong> actúan como viñetas limpias para que las portadas y los datos técnicos respiren.
+          </p>
+        </div>
+
+        <div class="bg-[#f5e6c4] border-2 border-[#260701] rounded-2xl p-4 shadow-[4px_4px_0px_#260701]">
+          <div class="font-caprasimo text-xl text-[#d91e00] mb-1">1. Caprasimo (Display)</div>
+          <p class="text-xs font-semibold text-[#260701] leading-relaxed">
+            Reservada para el cabezal, precios grandes y <em>Hype Stickers</em> en estrella. Con filete de tinta <code>#260701</code> y sombra sólida conecta los carteles de conciertos 70s con los títulos de <em>Cuphead</em>.
+          </p>
+        </div>
+
+        <div class="bg-[#f5e6c4] border-2 border-[#260701] rounded-2xl p-4 shadow-[4px_4px_0px_#260701]">
+          <div class="font-extrabold text-lg text-[#260701] mb-1">2. Plus Jakarta Sans (UI)</div>
+          <p class="text-xs font-semibold text-[#260701] leading-relaxed">
+            Usada en pesos <strong>600, 700 y 800</strong> con <code>tabular-nums</code>. Garantiza que estados (<em>Mint, NM, VG+</em>), prensajes y duraciones (<code>03:42</code>) se lean al instante sin fatiga visual.
+          </p>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- REPRODUCTOR INFERIOR ESTILO TOCADISCOS VINTAGE + TRACKLIST -->
+  <div id="playerBar" class="fixed bottom-0 inset-x-0 z-40 px-3 sm:px-6 pb-3 pointer-events-none">
+    <div class="max-w-6xl mx-auto brutal-box bg-[#260701] text-[#fdf6e2] rounded-3xl p-3 sm:p-4 pointer-events-auto shadow-[0px_-4px_0px_#260701,8px_8px_0px_#f96d00] border-4 border-[#260701]">
+      <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+        
+        <!-- Plato Giradiscos Animado + Info de Pista Activa -->
+        <div class="flex items-center gap-3.5 w-full md:w-auto">
+          <div class="relative w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-[#f9a602] border-2 border-[#fdf6e2] flex items-center justify-center shrink-0 overflow-hidden">
+            <!-- Disco girando en el reproductor -->
+            <div id="playerDisc" class="w-12 h-12 rounded-full bg-[#260701] border-2 border-[#fdf6e2] flex items-center justify-center spin-vinyl" style="animation-play-state: paused;">
+              <div id="playerDiscCenter" class="w-5 h-5 rounded-full bg-[#f96d00] border border-[#fdf6e2] flex items-center justify-center">
+                <div class="w-1.5 h-1.5 rounded-full bg-[#260701]"></div>
+              </div>
+            </div>
+            <!-- Brazo de aguja -->
+            <div id="toneArm" class="absolute top-1 right-1 w-2 h-9 bg-[#fdf6e2] border border-[#260701] rounded-full origin-top transition-transform duration-300 -rotate-12"></div>
+          </div>
+
+          <div class="min-w-0 flex-1">
+            <div class="flex items-center gap-2">
+              <span id="playerStatusBadge" class="bg-[#f96d00] text-[#260701] text-[10px] font-extrabold uppercase px-2 py-0.5 rounded-full">
+                AGUJA EN REPOSO
+              </span>
+              <span id="playerFormatTag" class="text-xs font-bold text-[#f9a602] truncate">
+                LP 180g • 33 RPM
+              </span>
+            </div>
+            <h4 id="playerAlbumTitle" class="font-extrabold text-sm sm:text-base text-[#fdf6e2] truncate mt-0.5">
+              Fiebre en el Surco (Edición Psicodélica)
+            </h4>
+            <p id="playerTrackName" class="text-xs font-semibold text-[#f5e6c4]/90 truncate tabular-nums">
+              Pista A1: Groove de Medianoche — <span class="text-[#f9a602] font-bold">03:48</span>
+            </p>
+          </div>
+        </div>
+
+        <!-- Controles de Audio Sintetizado (Web Audio API sin archivos externos) -->
+        <div class="flex items-center gap-3 w-full md:w-auto justify-between md:justify-center border-t md:border-t-0 border-[#4a190c] pt-2 md:pt-0">
+          <div class="flex items-center gap-2">
+            <button
+              id="playPauseBtn"
+              class="rubber-btn bg-[#f9a602] hover:bg-[#f96d00] text-[#260701] rounded-full px-4 py-2 font-extrabold text-xs sm:text-sm flex items-center gap-2 border-2 border-[#260701]"
+            >
+              <span id="playBtnIcon">▶</span>
+              <span id="playBtnText">PROBAR SONIDO VINILO</span>
+            </button>
+
+            <button
+              id="toggleTracklistModalBtn"
+              class="rubber-btn bg-[#fdf6e2] text-[#260701] rounded-full px-3.5 py-2 font-extrabold text-xs flex items-center gap-1.5 border-2 border-[#260701]"
+            >
+              <span>📜 VER TRACKLIST</span>
+              <span id="trackCountLabel" class="bg-[#260701] text-[#f9a602] rounded-full px-1.5 py-0.2 text-[10px] tabular-nums">4</span>
+            </button>
+          </div>
+
+          <!-- Vúmetro analógico animado -->
+          <div class="hidden sm:flex items-end gap-1 h-8 px-3 py-1 bg-[#180400] rounded-xl border border-[#4a190c]">
+            <div class="vu-bar w-1.5 bg-[#f9a602] rounded-t h-2 transition-all duration-150"></div>
+            <div class="vu-bar w-1.5 bg-[#f96d00] rounded-t h-4 transition-all duration-150"></div>
+            <div class="vu-bar w-1.5 bg-[#d91e00] rounded-t h-3 transition-all duration-150"></div>
+            <div class="vu-bar w-1.5 bg-[#f9a602] rounded-t h-5 transition-all duration-150"></div>
+            <div class="vu-bar w-1.5 bg-[#f96d00] rounded-t h-2 transition-all duration-150"></div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Gaveta Desplegable de Tracklist con Tabular-Nums -->
+      <div id="tracklistDrawer" class="hidden mt-3 pt-3 border-t-2 border-[#4a190c]">
+        <div class="flex items-center justify-between mb-2">
+          <span class="text-xs font-extrabold uppercase tracking-wider text-[#f9a602]">
+            LISTA DE PISTAS (ALINEACIÓN NUMÉRICA TABULAR-NUMS EN PLUS JAKARTA SANS)
+          </span>
+          <span class="text-[11px] font-bold text-[#f5e6c4]/80">Haz clic en una pista para pincharla</span>
+        </div>
+        <div id="tracklistItems" class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+          <!-- Pistas inyectadas por JS -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DRAWER LATERAL DEL CARRITO ("MI MALETA DE DISCOS") -->
+  <div id="cartDrawerBackdrop" class="fixed inset-0 bg-[#260701]/70 backdrop-blur-xs z-50 hidden items-center justify-end p-3 sm:p-5">
+    <div class="brutal-box w-full max-w-md h-full max-h-[92vh] rounded-3xl bg-[#fdf6e2] flex flex-col justify-between overflow-hidden">
+      <!-- Cabecera del Carrito -->
+      <div class="p-5 bg-[#f9a602] border-b-4 border-[#260701] flex items-center justify-between">
+        <div>
+          <span class="text-[11px] font-extrabold uppercase tracking-wider text-[#260701]">PEDIDO FÍSICO PROTEGIDO</span>
+          <h3 class="font-caprasimo text-2xl text-[#260701]">MI MALETA DE DISCOS</h3>
+        </div>
+        <button id="closeCartBtn" class="rubber-btn bg-[#fdf6e2] text-[#260701] w-10 h-10 rounded-full font-extrabold text-lg flex items-center justify-center">
+          ✕
+        </button>
+      </div>
+
+      <!-- Lista de Items -->
+      <div id="cartItemsContainer" class="p-5 overflow-y-auto flex-1 space-y-3">
+        <!-- Renderizado por JS -->
+      </div>
+
+      <!-- Pie del Carrito con Totales Tabular-Nums -->
+      <div class="p-5 bg-[#f5e6c4] border-t-4 border-[#260701] space-y-3">
+        <div class="flex justify-between text-xs font-bold text-[#6e260e] tabular-nums">
+          <span>Empaquetado anti-golpes + Funda japonesa</span>
+          <span>GRATIS</span>
+        </div>
+        <div class="flex justify-between items-baseline">
+          <span class="text-base font-extrabold text-[#260701]">TOTAL DEL PEDIDO:</span>
+          <span id="cartTotalPrice" class="price-display text-3xl tabular-nums">67,80 €</span>
+        </div>
+        <button id="checkoutBtn" class="rubber-btn w-full bg-[#d91e00] hover:bg-[#f96d00] text-[#fdf6e2] rounded-full py-3.5 font-extrabold text-sm tracking-wider uppercase">
+          PASAR POR CAJA • PRENSADO INMEDIATO
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- NOTIFICACIÓN TOAST ESTILO BOCADILLO CÓMIC AÑOS 30 -->
+  <div id="cartoonToast" class="fixed top-6 right-6 z-50 transform translate-x-[150%] transition-transform duration-300 pointer-events-none">
+    <div class="brutal-box bg-[#f9a602] text-[#260701] rounded-2xl px-5 py-3.5 flex items-center gap-3 shadow-[6px_6px_0px_#260701]">
+      <span class="text-2xl">🎺</span>
+      <div>
+        <div id="toastTitle" class="font-caprasimo text-base leading-none">¡AL SACO!</div>
+        <div id="toastMsg" class="text-xs font-extrabold mt-0.5">Vinilo añadido a tu maleta</div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // =========================================================================
+    // CATÁLOGO DE PRODUCTOS (Vinilos LP, Casetes y Singles 7")
+    // =========================================================================
+    const catalog = [
+      {
+        id: 1,
+        title: "Fiebre en el Surco",
+        artist: "Los Magnéticos del 73",
+        label: "Discos Terciopelo • 1974",
+        format: "LP",
+        formatLabel: "LP 12\" • 180g Naranja",
+        condition: "M",
+        conditionLabel: "MINT (M)",
+        price: 34.90,
+        stickerText: "180G COLOR",
+        stickerType: "star",
+        stickerBg: "#f9a602",
+        discColor: "#f96d00",
+        labelColor: "#f9a602",
+        coverBg: "#260701",
+        coverAccent: "#f96d00",
+        bpm: 112,
+        baseFreq: 110,
+        tracks: [
+          { num: "A1", name: "Groove de Medianoche", time: "03:48" },
+          { num: "A2", name: "Cinta Concéntrica", time: "04:15" },
+          { num: "B1", name: "Baile del Muelle", time: "03:22" },
+          { num: "B2", name: "Tinta y Semitono", time: "05:04" }
+        ]
+      },
+      {
+        id: 2,
+        title: "Sinfonía de Cromo Vol. II",
+        artist: "Orquesta Vodevil Eléctrico",
+        label: "Cintas Sultán • 1978",
+        format: "CASSETTE",
+        formatLabel: "Casete CrO₂ • Dolby B",
+        condition: "NM",
+        conditionLabel: "NEAR MINT (NM)",
+        price: 18.50,
+        stickerText: "CINTA CROMO",
+        stickerType: "pill",
+        stickerBg: "#f96d00",
+        discColor: "#d91e00",
+        labelColor: "#fdf6e2",
+        coverBg: "#d91e00",
+        coverAccent: "#f9a602",
+        bpm: 124,
+        baseFreq: 130.81,
+        tracks: [
+          { num: "A1", name: "Obertura de Caricatura", time: "02:55" },
+          { num: "A2", name: "Rebote en Do Menor", time: "03:19" },
+          { num: "B1", name: "Rebobinado con Lápiz", time: "04:02" },
+          { num: "B2", name: "Final de Feria", time: "02:44" }
+        ]
+      },
+      {
+        id: 3,
+        title: "Veneno en la Aguja / Cara B",
+        artist: "Perla y Los Cometas",
+        label: "Hispanovox Retro • 1971",
+        format: "7INCH",
+        formatLabel: "Single 7\" • 45 RPM",
+        condition: "VG+",
+        conditionLabel: "VINTAGE (VG+)",
+        price: 14.00,
+        stickerText: "¡ÚLTIMO!",
+        stickerType: "star",
+        stickerBg: "#d91e00",
+        discColor: "#260701",
+        labelColor: "#f96d00",
+        coverBg: "#f9a602",
+        coverAccent: "#260701",
+        bpm: 132,
+        baseFreq: 146.83,
+        tracks: [
+          { num: "A1", name: "Veneno en la Aguja (Mono)", time: "02:38" },
+          { num: "B1", name: "Instrumental del Sur", time: "02:51" }
+        ]
+      },
+      {
+        id: 4,
+        title: "Psicodelia de Papel Kraft",
+        artist: "Triángulo de Ámbar",
+        label: "Zafiro Grooves • 1975",
+        format: "LP",
+        formatLabel: "2xLP Gatefold • 180g",
+        condition: "M",
+        conditionLabel: "MINT (M)",
+        price: 42.00,
+        stickerText: "EDICIÓN 70s",
+        stickerType: "pill",
+        stickerBg: "#f9a602",
+        discColor: "#f9a602",
+        labelColor: "#d91e00",
+        coverBg: "#6e260e",
+        coverAccent: "#f9a602",
+        bpm: 98,
+        baseFreq: 98.00,
+        tracks: [
+          { num: "A1", name: "Humo Naranja", time: "06:12" },
+          { num: "A2", name: "Aguja de Diamante", time: "04:40" },
+          { num: "B1", name: "Ecos del Sótano", time: "05:18" },
+          { num: "B2", name: "Sol de Octubre", time: "07:05" }
+        ]
+      },
+      {
+        id: 5,
+        title: "El Diablo Tocó el Contrabajo",
+        artist: "Tito 'Pie-Cut' & Su Banda",
+        label: "Inkwell Records • 1936/76",
+        format: "LP",
+        formatLabel: "LP 12\" • Remaster Mono",
+        condition: "NM",
+        conditionLabel: "NEAR MINT (NM)",
+        price: 32.90,
+        stickerText: "ESTILO 1930s",
+        stickerType: "star",
+        stickerBg: "#f96d00",
+        discColor: "#260701",
+        labelColor: "#f9a602",
+        coverBg: "#260701",
+        coverAccent: "#d91e00",
+        bpm: 140,
+        baseFreq: 123.47,
+        tracks: [
+          { num: "A1", name: "Swing de la Taza Rota", time: "03:04" },
+          { num: "A2", name: "Guantes Blancos", time: "02:49" },
+          { num: "B1", name: "Casino de Medianoche", time: "03:33" },
+          { num: "B2", name: "Ragtime del Surco", time: "02:58" }
+        ]
+      },
+      {
+        id: 6,
+        title: "Sesiones de Garaje en Directo",
+        artist: "Cinta Virgen",
+        label: "Autoeditado • 1979",
+        format: "CASSETTE",
+        formatLabel: "Casete Férrica • Caja Naranja",
+        condition: "VG+",
+        conditionLabel: "VINTAGE (VG+)",
+        price: 15.90,
+        stickerText: "RAREZA",
+        stickerType: "pill",
+        stickerBg: "#d91e00",
+        discColor: "#f96d00",
+        labelColor: "#260701",
+        coverBg: "#f96d00",
+        coverAccent: "#260701",
+        bpm: 118,
+        baseFreq: 116.54,
+        tracks: [
+          { num: "A1", name: "Saturación de Cabezal", time: "03:11" },
+          { num: "A2", name: "Vúmetro al Rojo", time: "02:47" },
+          { num: "B1", name: "Cara B Escondida", time: "04:29" }
+        ]
+      },
+      {
+        id: 7,
+        title: "Boogaloo de la Cafetera",
+        artist: "Hermanos Tueste",
+        label: "Fania / Surco • 1972",
+        format: "7INCH",
+        formatLabel: "Single 7\" • Centro Grande",
+        condition: "M",
+        conditionLabel: "MINT (M)",
+        price: 16.50,
+        stickerText: "45 RPM CLUB",
+        stickerType: "star",
+        stickerBg: "#f9a602",
+        discColor: "#d91e00",
+        labelColor: "#f9a602",
+        coverBg: "#4a190c",
+        coverAccent: "#f96d00",
+        bpm: 128,
+        baseFreq: 138.59,
+        tracks: [
+          { num: "A1", name: "Boogaloo de la Cafetera", time: "03:09" },
+          { num: "B1", name: "Descarga en Crema", time: "03:24" }
+        ]
+      },
+      {
+        id: 8,
+        title: "Ópera Groovie en 4 Actos",
+        artist: "Sindicato del Moog",
+        label: "Cosecha Cósmica • 1977",
+        format: "LP",
+        formatLabel: "LP 12\" • Vinilo Splatter",
+        condition: "NM",
+        conditionLabel: "NEAR MINT (NM)",
+        price: 38.00,
+        stickerText: "SPLATTER",
+        stickerType: "pill",
+        stickerBg: "#f96d00",
+        discColor: "#f9a602",
+        labelColor: "#260701",
+        coverBg: "#d91e00",
+        coverAccent: "#260701",
+        bpm: 106,
+        baseFreq: 103.83,
+        tracks: [
+          { num: "A1", name: "Arpegio de Terciopelo", time: "04:52" },
+          { num: "A2", name: "Cinta Infinita", time: "05:11" },
+          { num: "B1", name: "Vuelo en Semitono", time: "04:08" },
+          { num: "B2", name: "Epílogo en 33 RPM", time: "06:20" }
+        ]
+      }
+    ];
+
+    // Estado de la aplicación
+    let currentFormat = "all";
+    let currentCondition = "all";
+    let searchQuery = "";
+    let activeAlbum = catalog[0];
+    let activeTrackIndex = 0;
+    let isPlaying = false;
+    let audioCtx = null;
+    let grooveInterval = null;
+    let cart = [
+      { ...catalog[0], qty: 1 },
+      { ...catalog[4], qty: 1 }
+    ];
+
+    // =========================================================================
+    // GENERADOR DE ARTE DE PORTADA Y VINILO / CASETE (SVG Personalizado)
+    // =========================================================================
+    function createCoverArtworkSVG(item) {
+      return `
+        <svg viewBox="0 0 200 200" class="w-full h-full">
+          <rect width="200" height="200" fill="${item.coverBg}"/>
+          <!-- Semitono decorativo de fondo -->
+          <circle cx="100" cy="100" r="88" fill="none" stroke="#fdf6e2" stroke-width="2" stroke-dasharray="4 6" opacity="0.35"/>
+          <!-- Cintas concéntricas estilo años 70 -->
+          <path d="M-10 150 H85 A45 45 0 1 0 85 60 A25 25 0 1 0 85 110 H210" fill="none" stroke="#f9a602" stroke-width="32" stroke-linecap="round"/>
+          <path d="M-10 150 H85 A45 45 0 1 0 85 60 A25 25 0 1 0 85 110 H210" fill="none" stroke="#f96d00" stroke-width="22" stroke-linecap="round"/>
+          <path d="M-10 150 H85 A45 45 0 1 0 85 60 A25 25 0 1 0 85 110 H210" fill="none" stroke="#d91e00" stroke-width="12" stroke-linecap="round"/>
+          <!-- Círculo central con ilustración retro -->
+          <circle cx="100" cy="95" r="42" fill="#fdf6e2" stroke="#260701" stroke-width="5"/>
+          <circle cx="100" cy="95" r="32" fill="${item.coverAccent}" stroke="#260701" stroke-width="3"/>
+          <!-- Ojos Pie-Cut años 30 en la portada -->
+          <ellipse cx="91" cy="90" rx="5" ry="8" fill="#fdf6e2" stroke="#260701" stroke-width="2"/>
+          <ellipse cx="109" cy="90" rx="5" ry="8" fill="#fdf6e2" stroke="#260701" stroke-width="2"/>
+          <circle cx="92" cy="90" r="2.5" fill="#260701"/>
+          <circle cx="110" cy="90" r="2.5" fill="#260701"/>
+          <path d="M88 103 Q100 112 112 103" stroke="#260701" stroke-width="3" fill="none" stroke-linecap="round"/>
+          <!-- Etiqueta tipográfica integrada en portada -->
+          <rect x="14" y="14" width="76" height="20" rx="10" fill="#fdf6e2" stroke="#260701" stroke-width="3"/>
+          <text x="52" y="28" text-anchor="middle" font-family="Plus Jakarta Sans" font-weight="800" font-size="10" fill="#260701">ESTÉREO HIFI</text>
+        </svg>
+      `;
+    }
+
+    function createSlidingMediaSVG(item) {
+      if (item.format === "CASSETTE") {
+        // Cinta de casete que asoma por el lateral
+        return `
+          <svg viewBox="0 0 180 180" class="w-full h-full drop-shadow-[4px_4px_0px_#260701]">
+            <rect x="25" y="18" width="140" height="144" rx="14" fill="${item.discColor}" stroke="#260701" stroke-width="5"/>
+            <rect x="42" y="34" width="106" height="112" rx="8" fill="#fdf6e2" stroke="#260701" stroke-width="3"/>
+            <rect x="68" y="48" width="54" height="84" rx="27" fill="#260701"/>
+            <circle cx="95" cy="68" r="13" fill="#fdf6e2" stroke="#f9a602" stroke-width="3"/>
+            <circle cx="95" cy="112" r="13" fill="#fdf6e2" stroke="#f9a602" stroke-width="3"/>
+          </svg>
+        `;
+      }
+      // Vinilo LP o Single 7" que asoma girando
+      const centerHoleRadius = item.format === "7INCH" ? "16" : "6";
+      return `
+        <svg viewBox="0 0 180 180" class="w-full h-full drop-shadow-[4px_4px_0px_#260701]">
+          <circle cx="90" cy="90" r="84" fill="${item.discColor}" stroke="#260701" stroke-width="5"/>
+          <circle cx="90" cy="90" r="72" fill="none" stroke="#fdf6e2" stroke-width="1.5" stroke-dasharray="18 12" opacity="0.45"/>
+          <circle cx="90" cy="90" r="58" fill="none" stroke="#260701" stroke-width="1.5" stroke-dasharray="12 10" opacity="0.45"/>
+          <circle cx="90" cy="90" r="32" fill="${item.labelColor}" stroke="#260701" stroke-width="4"/>
+          <circle cx="90" cy="90" r="${centerHoleRadius}" fill="#fdf6e2" stroke="#260701" stroke-width="3"/>
+        </svg>
+      `;
+    }
+
+    function createHypeStickerHTML(item) {
+      const textColor = item.stickerBg === "#d91e00" ? "#fdf6e2" : "#260701";
+      if (item.stickerType === "star") {
+        return `
+          <div class="hype-sticker absolute -top-3 -right-3 z-20 w-20 h-20 flex items-center justify-center pointer-events-none">
+            <svg viewBox="0 0 100 100" class="w-full h-full drop-shadow-[3px_3px_0px_#260701]">
+              <polygon points="50,3 63,18 82,11 84,31 98,44 86,60 92,79 73,83 64,98 48,88 31,96 25,78 7,73 15,55 4,39 22,29 24,10 42,17"
+                fill="${item.stickerBg}" stroke="#260701" stroke-width="4" stroke-linejoin="round"/>
+            </svg>
+            <span class="font-caprasimo absolute text-[11px] leading-tight text-center px-2" style="color:${textColor}">
+              ${item.stickerText}
+            </span>
+          </div>
+        `;
+      }
+      return `
+        <div class="hype-sticker absolute -top-2.5 -right-2 z-20 px-3 py-1 rounded-full border-3 border-[#260701] shadow-[3px_3px_0px_#260701] pointer-events-none"
+             style="background-color:${item.stickerBg}; color:${textColor}; border-width:3px;">
+          <span class="font-caprasimo text-xs tracking-wide">${item.stickerText}</span>
+        </div>
+      `;
+    }
+
+    // =========================================================================
+    // RENDERIZADO DE LA RETÍCULA DE PRODUCTOS
+    // =========================================================================
+    function renderCatalog() {
+      const grid = document.getElementById("productGrid");
+      const counter = document.getElementById("resultsCounter");
+
+      const filtered = catalog.filter(item => {
+        const matchFormat = currentFormat === "all" || item.format === currentFormat;
+        const matchCondition = currentCondition === "all" || item.condition === currentCondition;
+        const matchSearch =
+          item.title.toLowerCase().includes(searchQuery) ||
+          item.artist.toLowerCase().includes(searchQuery) ||
+          item.label.toLowerCase().includes(searchQuery);
+        return matchFormat && matchCondition && matchSearch;
+      });
+
+      counter.textContent = `Mostrando ${filtered.length} ${filtered.length === 1 ? 'joya analógica' : 'joyas analógicas'}`;
+
+      if (filtered.length === 0) {
+        grid.innerHTML = `
+          <div class="col-span-full brutal-box rounded-3xl p-10 text-center bg-[#fdf6e2]">
+            <div class="text-5xl mb-3">🕵️‍♂️</div>
+            <h3 class="font-caprasimo text-2xl text-[#260701]">¡Surco vacío, camarada!</h3>
+            <p class="text-sm font-bold text-[#6e260e] mt-1">No hay discos con esa combinación de filtros. Prueba a limpiar la búsqueda.</p>
+            <button onclick="resetFilters()" class="rubber-btn mt-4 bg-[#f9a602] text-[#260701] rounded-full px-5 py-2 text-xs font-extrabold uppercase">
+              Restaurar todos los discos
+            </button>
+          </div>
+        `;
+        return;
+      }
+
+      grid.innerHTML = filtered.map(item => {
+        const isCurrentPlaying = activeAlbum.id === item.id && isPlaying;
+        const conditionBadgeColor =
+          item.condition === "M" ? "bg-[#f9a602] text-[#260701]" :
+          item.condition === "NM" ? "bg-[#f5e6c4] text-[#260701]" :
+          "bg-[#f96d00] text-[#fdf6e2]";
+
+        return `
+          <article class="brutal-card rounded-3xl p-4 flex flex-col justify-between relative group">
+            ${createHypeStickerHTML(item)}
+
+            <div>
+              <!-- Escenario de Portada + Vinilo/Casete deslizante -->
+              <div class="relative mb-4 pt-1 pr-6">
+                <!-- Disco / Casete que asoma al hacer hover -->
+                <div class="record-disc absolute top-2 right-4 w-4/5 aspect-square z-0 pointer-events-none">
+                  ${createSlidingMediaSVG(item)}
+                </div>
+
+                <!-- Funda cuadrada con borde de tinta -->
+                <div class="relative z-10 aspect-square w-full rounded-2xl border-3 border-[#260701] overflow-hidden shadow-[4px_4px_0px_#260701] bg-[#260701]" style="border-width:3px;">
+                  ${createCoverArtworkSVG(item)}
+                </div>
+              </div>
+
+              <!-- Metadatos técnicos en Plus Jakarta Sans -->
+              <div class="flex flex-wrap items-center gap-1.5 mb-2">
+                <span class="text-[11px] font-extrabold uppercase tracking-wider px-2.5 py-0.5 rounded-full border-2 border-[#260701] bg-[#260701] text-[#fdf6e2]">
+                  ${item.formatLabel}
+                </span>
+                <span class="text-[11px] font-extrabold uppercase px-2.5 py-0.5 rounded-full border-2 border-[#260701] ${conditionBadgeColor}">
+                  ${item.conditionLabel}
+                </span>
+              </div>
+
+              <div class="text-[11px] font-bold text-[#7a5438] uppercase tracking-wider mb-0.5">
+                ${item.label}
+              </div>
+
+              <h3 class="text-lg font-extrabold text-[#260701] leading-snug group-hover:text-[#d91e00] transition-colors">
+                ${item.title}
+              </h3>
+
+              <p class="text-sm font-bold text-[#b8330a] mb-3">
+                ${item.artist}
+              </p>
+
+              <!-- Mini vista previa de las 2 primeras pistas con Tabular-Nums -->
+              <div class="bg-[#f5e6c4] border-2 border-[#260701] rounded-xl p-2.5 mb-4 space-y-1">
+                <div class="flex items-center justify-between text-[10px] font-extrabold uppercase text-[#6e260e] border-b border-[#260701]/20 pb-1">
+                  <span>CARA / PISTA</span>
+                  <span>DURACIÓN</span>
+                </div>
+                ${item.tracks.slice(0, 2).map(t => `
+                  <div class="flex items-center justify-between text-xs font-bold text-[#260701] tabular-nums">
+                    <span class="truncate pr-2"><strong class="text-[#d91e00]">${t.num}</strong> ${t.name}</span>
+                    <span class="font-extrabold text-[#6e260e] shrink-0">${t.time}</span>
+                  </div>
+                `).join("")}
+              </div>
+            </div>
+
+            <!-- Pie de Tarjeta: Precio en Caprasimo + Acciones -->
+            <div class="pt-2 border-t-2 border-dashed border-[#260701]/30 flex items-center justify-between gap-2">
+              <div>
+                <span class="block text-[10px] font-extrabold uppercase text-[#6e260e]">PRECIO FINAL</span>
+                <span class="price-display text-2xl sm:text-3xl leading-none">
+                  ${item.price.toFixed(2).replace(".", ",")} €
+                </span>
+              </div>
+
+              <div class="flex items-center gap-2">
+                <button
+                  onclick="previewAlbum(${item.id})"
+                  class="rubber-btn ${isCurrentPlaying ? 'bg-[#d91e00] text-[#fdf6e2]' : 'bg-[#f5e6c4] text-[#260701]'} rounded-full px-3 py-2 text-xs font-extrabold flex items-center gap-1"
+                  title="Pinchar en el tocadiscos inferior y ver tracklist completo"
+                >
+                  <span>${isCurrentPlaying ? '⏸' : '🎧'}</span>
+                  <span class="hidden sm:inline">Preview</span>
+                </button>
+
+                <button
+                  onclick="addToCart(${item.id})"
+                  class="rubber-btn bg-[#f9a602] hover:bg-[#f96d00] text-[#260701] hover:text-[#fdf6e2] rounded-full px-3.5 py-2 text-xs font-extrabold uppercase tracking-wide flex items-center gap-1"
+                >
+                  <span>+ Añadir</span>
+                </button>
+              </div>
+            </div>
+          </article>
+        `;
+      }).join("");
+    }
+
+    // =========================================================================
+    // TOCADISCOS INFERIOR + SINTETIZADOR DE GROOVE ANALÓGICO (Web Audio API)
+    // =========================================================================
+    function updatePlayerUI() {
+      const track = activeAlbum.tracks[activeTrackIndex] || activeAlbum.tracks[0];
+      document.getElementById("playerAlbumTitle").textContent = `${activeAlbum.title} — ${activeAlbum.artist}`;
+      document.getElementById("playerFormatTag").textContent = `${activeAlbum.formatLabel} • ${activeAlbum.conditionLabel}`;
+      document.getElementById("playerTrackName").innerHTML = `Pista ${track.num}: ${track.name} — <span class="text-[#f9a602] font-bold">${track.time}</span>`;
+      document.getElementById("trackCountLabel").textContent = activeAlbum.tracks.length;
+      document.getElementById("playerDiscCenter").style.backgroundColor = activeAlbum.discColor;
+
+      const discEl = document.getElementById("playerDisc");
+      const armEl = document.getElementById("toneArm");
+      const badgeEl = document.getElementById("playerStatusBadge");
+      const playIcon = document.getElementById("playBtnIcon");
+      const playText = document.getElementById("playBtnText");
+
+      if (isPlaying) {
+        discEl.style.animationPlayState = "running";
+        armEl.classList.remove("-rotate-12");
+        armEl.classList.add("rotate-12");
+        badgeEl.textContent = "SONANDO AHORA";
+        badgeEl.className = "bg-[#d91e00] text-[#fdf6e2] text-[10px] font-extrabold uppercase px-2 py-0.5 rounded-full animate-pulse";
+        playIcon.textContent = "⏸";
+        playText.textContent = "PAUSAR AGUJA";
+      } else {
+        discEl.style.animationPlayState = "paused";
+        armEl.classList.remove("rotate-12");
+        armEl.classList.add("-rotate-12");
+        badgeEl.textContent = "AGUJA EN REPOSO";
+        badgeEl.className = "bg-[#f96d00] text-[#260701] text-[10px] font-extrabold uppercase px-2 py-0.5 rounded-full";
+        playIcon.textContent = "▶";
+        playText.textContent = "PROBAR SONIDO VINILO";
+      }
+
+      // Renderizar lista de pistas en la gaveta
+      const tracklistContainer = document.getElementById("tracklistItems");
+      tracklistContainer.innerHTML = activeAlbum.tracks.map((t, idx) => {
+        const activeClass = idx === activeTrackIndex
+          ? "bg-[#f9a602] text-[#260701] border-[#fdf6e2]"
+          : "bg-[#180400] text-[#fdf6e2] border-[#4a190c] hover:border-[#f96d00]";
+        return `
+          <button
+            onclick="selectTrack(${idx})"
+            class="flex items-center justify-between px-3.5 py-2 rounded-xl border-2 text-xs font-bold tabular-nums transition-colors ${activeClass}"
+          >
+            <span class="truncate pr-2">
+              <strong class="mr-1.5">${t.num}</strong> ${t.name}
+            </span>
+            <span class="font-extrabold shrink-0">${t.time}</span>
+          </button>
+        `;
+      }).join("");
+    }
+
+    function startSynthGroove() {
+      if (!audioCtx) {
+        const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+        audioCtx = new AudioContextClass();
+      }
+      if (audioCtx.state === "suspended") {
+        audioCtx.resume();
+      }
+      stopSynthGroove();
+
+      let step = 0;
+      const scaleMultipliers = [1, 1.189, 1.334, 1.498, 1.781, 1.498, 1.334, 1.189];
+      const stepTimeMs = Math.round((60 / activeAlbum.bpm) * 500);
+
+      grooveInterval = setInterval(() => {
+        if (!isPlaying || !audioCtx) return;
+
+        const now = audioCtx.currentTime;
+        // Bajo funk/soul cálido
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = step % 2 === 0 ? "triangle" : "sawtooth";
+
+        const noteFreq = activeAlbum.baseFreq * scaleMultipliers[step % scaleMultipliers.length];
+        osc.frequency.setValueAtTime(noteFreq, now);
+
+        gain.gain.setValueAtTime(0.09, now);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.22);
+
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start(now);
+        osc.stop(now + 0.24);
+
+        // Animar barras del vúmetro
+        document.querySelectorAll(".vu-bar").forEach(bar => {
+          const randomHeight = Math.floor(Math.random() * 22) + 6;
+          bar.style.height = `${randomHeight}px`;
+        });
+
+        step++;
+      }, stepTimeMs);
+    }
+
+    function stopSynthGroove() {
+      if (grooveInterval) {
+        clearInterval(grooveInterval);
+        grooveInterval = null;
+      }
+      document.querySelectorAll(".vu-bar").forEach(bar => {
+        bar.style.height = "6px";
+      });
+    }
+
+    window.previewAlbum = function(albumId) {
+      const found = catalog.find(i => i.id === albumId);
+      if (!found) return;
+
+      if (activeAlbum.id === found.id) {
+        isPlaying = !isPlaying;
+      } else {
+        activeAlbum = found;
+        activeTrackIndex = 0;
+        isPlaying = true;
+      }
+
+      if (isPlaying) {
+        startSynthGroove();
+        document.getElementById("tracklistDrawer").classList.remove("hidden");
+        showToast("¡AGUJA EN EL SURCO!", `Pinchando «${activeAlbum.title}»`);
+      } else {
+        stopSynthGroove();
+      }
+
+      updatePlayerUI();
+      renderCatalog();
+    };
+
+    window.selectTrack = function(idx) {
+      activeTrackIndex = idx;
+      isPlaying = true;
+      startSynthGroove();
+      updatePlayerUI();
+      renderCatalog();
+    };
+
+    // =========================================================================
+    // GESTIÓN DEL CARRITO ("MI MALETA") Y NOTIFICACIONES
+    // =========================================================================
+    window.addToCart = function(albumId) {
+      const item = catalog.find(i => i.id === albumId);
+      if (!item) return;
+
+      const existing = cart.find(c => c.id === albumId);
+      if (existing) {
+        existing.qty += 1;
+      } else {
+        cart.push({ ...item, qty: 1 });
+      }
+
+      updateCartUI();
+      showToast("¡A LA MALETA!", `${item.title} (${item.formatLabel}) añadido.`);
+    };
+
+    window.changeCartQty = function(albumId, delta) {
+      const idx = cart.findIndex(c => c.id === albumId);
+      if (idx === -1) return;
+      cart[idx].qty += delta;
+      if (cart[idx].qty <= 0) {
+        cart.splice(idx, 1);
+      }
+      updateCartUI();
+    };
+
+    function updateCartUI() {
+      const totalItems = cart.reduce((acc, i) => acc + i.qty, 0);
+      const totalPrice = cart.reduce((acc, i) => acc + i.price * i.qty, 0);
+
+      const badge = document.getElementById("cartCountBadge");
+      badge.textContent = totalItems;
+
+      document.getElementById("cartTotalPrice").textContent = `${totalPrice.toFixed(2).replace(".", ",")} €`;
+
+      const container = document.getElementById("cartItemsContainer");
+      if (cart.length === 0) {
+        container.innerHTML = `
+          <div class="text-center py-10">
+            <div class="text-4xl mb-2">🕸️</div>
+            <p class="font-caprasimo text-xl text-[#260701]">Tu maleta está vacía</p>
+            <p class="text-xs font-bold text-[#6e260e] mt-1">Añade algún vinilo o casete de la batea principal.</p>
+          </div>
+        `;
+        return;
+      }
+
+      container.innerHTML = cart.map(item => `
+        <div class="bg-[#f5e6c4] border-2 border-[#260701] rounded-2xl p-3 flex items-center justify-between gap-3 shadow-[3px_3px_0px_#260701]">
+          <div class="min-w-0 flex-1">
+            <span class="text-[10px] font-extrabold uppercase bg-[#260701] text-[#f9a602] px-2 py-0.5 rounded-full">
+              ${item.formatLabel}
+            </span>
+            <h4 class="font-extrabold text-sm text-[#260701] truncate mt-1">${item.title}</h4>
+            <p class="text-xs font-bold text-[#b8330a] truncate">${item.artist}</p>
+            <div class="text-xs font-extrabold text-[#260701] tabular-nums mt-1">
+              ${(item.price * item.qty).toFixed(2).replace(".", ",")} €
+            </div>
+          </div>
+
+          <div class="flex items-center gap-1.5 shrink-0 tabular-nums">
+            <button onclick="changeCartQty(${item.id}, -1)" class="w-7 h-7 rounded-full bg-[#fdf6e2] border-2 border-[#260701] font-extrabold text-xs">-</button>
+            <span class="w-6 text-center font-extrabold text-sm">${item.qty}</span>
+            <button onclick="changeCartQty(${item.id}, 1)" class="w-7 h-7 rounded-full bg-[#f9a602] border-2 border-[#260701] font-extrabold text-xs">+</button>
+          </div>
+        </div>
+      `).join("");
+    }
+
+    let toastTimeout = null;
+    function showToast(title, message) {
+      const toast = document.getElementById("cartoonToast");
+      document.getElementById("toastTitle").textContent = title;
+      document.getElementById("toastMsg").textContent = message;
+      toast.classList.remove("translate-x-[150%]");
+      clearTimeout(toastTimeout);
+      toastTimeout = setTimeout(() => {
+        toast.classList.add("translate-x-[150%]");
+      }, 2600);
+    }
+
+    window.resetFilters = function() {
+      currentFormat = "all";
+      currentCondition = "all";
+      searchQuery = "";
+      document.getElementById("searchInput").value = "";
+      updateFilterButtonsUI();
+      renderCatalog();
+    };
+
+    function updateFilterButtonsUI() {
+      document.querySelectorAll(".format-btn").forEach(btn => {
+        if (btn.dataset.format === currentFormat) {
+          btn.className = "format-btn rubber-btn bg-[#260701] text-[#f9a602] rounded-full px-4 py-1.5 text-xs sm:text-sm font-extrabold";
+        } else {
+          btn.className = "format-btn rubber-btn bg-[#fdf6e2] text-[#260701] rounded-full px-4 py-1.5 text-xs sm:text-sm font-bold";
+        }
+      });
+
+      document.querySelectorAll(".cond-btn").forEach(btn => {
+        if (btn.dataset.condition === currentCondition) {
+          btn.className = "cond-btn rubber-btn bg-[#f9a602] text-[#260701] rounded-full px-3.5 py-1 text-xs font-extrabold";
+        } else {
+          btn.className = "cond-btn rubber-btn bg-[#fdf6e2] text-[#260701] rounded-full px-3.5 py-1 text-xs font-bold";
+        }
+      });
+    }
+
+    // =========================================================================
+    // EVENT LISTENERS E INICIALIZACIÓN
+    // =========================================================================
+    window.addEventListener("DOMContentLoaded", () => {
+      renderCatalog();
+      updatePlayerUI();
+      updateCartUI();
+
+      // Filtros de formato
+      document.querySelectorAll(".format-btn").forEach(btn => {
+        btn.addEventListener("click", () => {
+          currentFormat = btn.dataset.format;
+          updateFilterButtonsUI();
+          renderCatalog();
+        });
+      });
+
+      // Filtros de estado
+      document.querySelectorAll(".cond-btn").forEach(btn => {
+        btn.addEventListener("click", () => {
+          currentCondition = btn.dataset.condition;
+          updateFilterButtonsUI();
+          renderCatalog();
+        });
+      });
+
+      // Buscador en tiempo real
+      document.getElementById("searchInput").addEventListener("input", e => {
+        searchQuery = e.target.value.trim().toLowerCase();
+        renderCatalog();
+      });
+
+      // Reproductor Play/Pause
+      document.getElementById("playPauseBtn").addEventListener("click", () => {
+        isPlaying = !isPlaying;
+        if (isPlaying) {
+          startSynthGroove();
+        } else {
+          stopSynthGroove();
+        }
+        updatePlayerUI();
+        renderCatalog();
+      });
+
+      // Desplegar Tracklist
+      document.getElementById("toggleTracklistModalBtn").addEventListener("click", () => {
+        document.getElementById("tracklistDrawer").classList.toggle("hidden");
+      });
+
+      // Mascota Don Surco recomienda un disco al azar
+      document.getElementById("mascotContainer").addEventListener("click", () => {
+        const randomItem = catalog[Math.floor(Math.random() * catalog.length)];
+        previewAlbum(randomItem.id);
+      });
+
+      // Abrir / Cerrar Carrito
+      const cartModal = document.getElementById("cartDrawerBackdrop");
+      document.getElementById("cartToggleBtn").addEventListener("click", () => {
+        cartModal.classList.remove("hidden");
+        cartModal.classList.add("flex");
+      });
+      document.getElementById("closeCartBtn").addEventListener("click", () => {
+        cartModal.classList.add("hidden");
+        cartModal.classList.remove("flex");
+      });
+      cartModal.addEventListener("click", e => {
+        if (e.target === cartModal) {
+          cartModal.classList.add("hidden");
+          cartModal.classList.remove("flex");
+        }
+      });
+
+      // Simulación de compra
+      document.getElementById("checkoutBtn").addEventListener("click", () => {
+        cartModal.classList.add("hidden");
+        cartModal.classList.remove("flex");
+        showToast("¡PEDIDO EN MARCHA!", "Don Surco está empaquetando tus vinilos.");
+      });
+    });
+  </script>
+</body>
+</html>
